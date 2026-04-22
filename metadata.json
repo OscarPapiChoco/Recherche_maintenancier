@@ -1,0 +1,8 @@
+{
+  "name": "FixItNow - Professional Maintenance Finder",
+  "description": "A premium platform to find and contact professional maintenance workers in any city. Includes AI-powered problem diagnosis and integrated maps.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}

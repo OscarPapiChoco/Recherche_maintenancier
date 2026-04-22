@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-primary: #0f172a;
+  --color-accent: #1e4ad8;
+  --color-brand: #f97316;
+  
+  --shadow-premium: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+  --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 font-sans selection:bg-accent/10 selection:text-accent;
+  }
+}
+
+@layer components {
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4 rounded-2xl font-bold text-[13px] uppercase tracking-widest transition-all duration-300 active:scale-95 flex items-center justify-center gap-3;
+  }
+  
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-glass;
+  }
+
+  .bento-grid {
+    @apply grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6;
+  }
+
+  .gradient-text-pro {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-accent;
+  }
+}
+
+/* Marquee for partners */
+.marquee-container {
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  gap: 40px;
+}
+
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 40px;
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
