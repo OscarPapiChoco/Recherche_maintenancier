@@ -3,18 +3,18 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Wrench, User, Mail, Phone, MapPin, 
-  ChevronLeft, ChevronRight, ShieldCheck, 
+  ChevronLeft, ShieldCheck, 
   Star, Clock, ThumbsUp, Calendar, 
   MessageSquare, Briefcase, ArrowRight,
   Search, Droplets, Zap, Hammer,
   Monitor, Snowflake, Paintbrush,
-  Eye, EyeOff, LogIn, UserPlus, Menu, X
+  Eye, EyeOff, LogIn, UserPlus
 } from 'lucide-react';
 import { CATEGORIES, MOCK_WORKERS } from './constants';
 import { MaintenanceWorker } from './types';
 import { diagnoseIssue } from './services/geminiService';
 
-declare var L: any; // Global Leaflet
+declare const L: any; // Global Leaflet
 
 const IconMap: { [key: string]: any } = {
   Droplets, Zap, Hammer, Monitor, Snowflake, Paintbrush
@@ -254,9 +254,13 @@ const App: React.FC = () => {
               </div>
               <button 
                 onClick={handleSearch}
-                className="w-full md:w-auto bg-slate-900 text-white px-12 py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-xl shadow-slate-900/10"
+                disabled={aiLoading}
+                className="w-full md:w-auto bg-slate-900 text-white px-12 py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2"
               >
-                Rechercher
+                {aiLoading ? (
+                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : null}
+                {aiLoading ? "Analyse..." : "Rechercher"}
               </button>
             </div>
           </div>
