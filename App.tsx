@@ -51,6 +51,38 @@ const App: React.FC = () => {
   const detailMapContainerRef = useRef<HTMLDivElement>(null);
   const markersLayerRef = useRef<any>(null);
 
+  function renderHeader() {
+    return (
+      <nav className="border-b border-slate-200/60 bg-white/80 backdrop-blur-md sticky top-0 z-[1001]">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-12">
+            <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setViewMode('landing')}>
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
+                <Wrench size={20} />
+              </div>
+              <span className="text-xl font-black text-slate-800 tracking-tighter">
+                Maintenance<span className="text-accent">Connect</span>
+              </span>
+            </div>
+            <div className="hidden lg:flex items-center gap-8 text-slate-500 font-bold text-[11px] uppercase tracking-widest">
+              <button onClick={() => setViewMode('list')} className="hover:text-primary transition-colors hover:scale-105 active:scale-95">Trouver un pro</button>
+              <button className="hover:text-primary transition-colors hover:scale-105 active:scale-95">Comment ça marche</button>
+              <button className="hover:text-primary transition-colors font-black text-primary/80 hover:scale-105 active:scale-95">Partenaires</button>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <button onClick={() => setViewMode('login')} className="flex items-center gap-2 text-slate-600 font-bold text-[11px] uppercase tracking-widest px-5 py-2.5 hover:bg-slate-50 rounded-xl transition-all active:scale-95">
+              <LogIn size={16} /> Connexion
+            </button>
+            <button onClick={() => setViewMode('register')} className="bg-brand text-slate-900 px-6 py-2.5 rounded-xl font-black text-[11px] uppercase tracking-widest shadow-lg shadow-brand/20 hover:brightness-110 active:scale-95 transition-all">
+              Rejoignez-nous
+            </button>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   const requestUserLocation = () => {
     setLocationLoading(true);
     if ("geolocation" in navigator) {
@@ -81,7 +113,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (viewMode === 'map' && mapContainerRef.current) {
       const timer = setTimeout(() => {
-        if (!mapContainerRef.current) return;
+        if (!mapContainerRef.current || typeof L === 'undefined') return;
         const center = userLocation || { lat: 4.0511, lng: 9.7679 }; // Douala center
         if (!mapRef.current) {
           mapRef.current = L.map(mapContainerRef.current, { zoomControl: false }).setView([center.lat, center.lng], 13);
@@ -144,36 +176,6 @@ const App: React.FC = () => {
     }
     setViewMode('list');
   };
-
-  const renderHeader = () => (
-    <nav className="border-b border-slate-200/60 bg-white/80 backdrop-blur-md sticky top-0 z-[1001]">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-12">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setViewMode('landing')}>
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
-              <Wrench size={20} />
-            </div>
-            <span className="text-xl font-black text-slate-800 tracking-tighter">
-              Maintenance<span className="text-accent">Connect</span>
-            </span>
-          </div>
-          <div className="hidden lg:flex items-center gap-8 text-slate-500 font-bold text-[11px] uppercase tracking-widest">
-            <button onClick={() => setViewMode('list')} className="hover:text-primary transition-colors hover:scale-105 active:scale-95">Trouver un pro</button>
-            <button className="hover:text-primary transition-colors hover:scale-105 active:scale-95">Comment ça marche</button>
-            <button className="hover:text-primary transition-colors font-black text-primary/80 hover:scale-105 active:scale-95">Partenaires</button>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button onClick={() => setViewMode('login')} className="flex items-center gap-2 text-slate-600 font-bold text-[11px] uppercase tracking-widest px-5 py-2.5 hover:bg-slate-50 rounded-xl transition-all active:scale-95">
-            <LogIn size={16} /> Connexion
-          </button>
-          <button onClick={() => setViewMode('register')} className="bg-brand text-slate-900 px-6 py-2.5 rounded-xl font-black text-[11px] uppercase tracking-widest shadow-lg shadow-brand/20 hover:brightness-110 active:scale-95 transition-all">
-            Rejoignez-nous
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
 
   const renderPartners = () => (
     <div className="py-20 border-y border-slate-100 bg-white shadow-sm overflow-hidden px-6">
@@ -844,7 +846,7 @@ const App: React.FC = () => {
         ) : (
           <PageTransition key={viewMode}>
             <main className="max-w-7xl mx-auto px-6 py-16 min-h-[calc(100vh-80px)] flex flex-col">
-              {viewMode === 'detail' ? renderWorkerDetail() : (
+              {viewMode === 'detail' && selectedWorker ? renderWorkerDetail() : (
                 <>
                   <div className="flex flex-col md:flex-row items-center justify-between gap-10 mb-16">
                     <div className="space-y-4">

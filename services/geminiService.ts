@@ -1,9 +1,13 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export const diagnoseIssue = async (userInput: string) => {
+  if (!process.env.GEMINI_API_KEY) {
+    console.warn("GEMINI_API_KEY is missing. AI features will be disabled.");
+    return null;
+  }
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
