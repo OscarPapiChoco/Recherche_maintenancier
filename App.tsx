@@ -317,57 +317,57 @@ const App: React.FC = () => {
   );
 
   const renderRecommended = () => (
-    <section className="py-24 bg-white">
+    <section className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-20 space-y-6">
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight font-display italic leading-none">Top Experts.</h2>
-          <p className="text-lg text-slate-400 font-medium leading-relaxed">
-            Professionnels sollicités et mieux notés de notre réseau.
+        <div className="text-center max-w-3xl mx-auto mb-24 space-y-7">
+          <h2 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tight font-display italic leading-none">Top Experts.</h2>
+          <p className="text-xl text-slate-400 font-medium leading-relaxed">
+            Les professionnels les plus sollicités et les mieux notés de notre réseau.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {workers.map(worker => (
             <motion.div 
               key={worker.id} 
               whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-[2rem] border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group cursor-pointer" 
+              className="bg-white rounded-[2.5rem] border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group cursor-pointer" 
               onClick={() => handleWorkerClick(worker)}
             >
-              <div className="relative h-60 overflow-hidden">
+              <div className="relative h-64 overflow-hidden">
                 <img src={worker.avatar} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={worker.name} />
-                <div className="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-lg">
+                <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg">
                   <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div> En ligne
                 </div>
               </div>
-              <div className="p-6 space-y-5">
+              <div className="p-7 space-y-6">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-black text-slate-900 text-lg group-hover:text-accent transition-colors">{worker.name}</h4>
-                  <div className="flex items-center gap-1 text-orange-500 font-black text-[12px]"><Star size={12} className="fill-current" /> {worker.rating}</div>
+                  <h4 className="font-black text-slate-900 text-xl group-hover:text-accent transition-colors">{worker.name}</h4>
+                  <div className="flex items-center gap-1 text-orange-500 font-black text-[13px]"><Star size={14} className="fill-current" /> {worker.rating}</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {worker.skills.slice(0, 2).map((skill, i) => (
-                    <span key={i} className="px-3 py-1.5 bg-slate-50 text-slate-400 rounded-lg text-[8.5px] font-black uppercase tracking-widest border border-slate-100">{skill}</span>
+                    <span key={i} className="px-3.5 py-1.5 bg-slate-50 text-slate-400 rounded-lg text-[9px] font-black uppercase tracking-widest border border-slate-100">{skill}</span>
                   ))}
                 </div>
-                <div className="flex items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-widest pb-4 border-b border-slate-100">
-                  <MapPin size={14} className="text-accent" /> {worker.location.address}
+                <div className="flex items-center gap-2 text-slate-400 font-bold text-[11px] uppercase tracking-widest pb-5 border-b border-slate-100">
+                  <MapPin size={16} className="text-accent" /> {worker.location.address}
                 </div>
-                <div className="flex items-center justify-between pt-1">
-                  <div className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">{worker.experience} exp.</div>
-                  <div className="text-xl font-black text-slate-900">{worker.hourlyRate.toLocaleString()} <span className="text-[10px] text-slate-300">FCFA/H</span></div>
+                <div className="flex items-center justify-between pt-1.5">
+                  <div className="text-slate-400 font-bold text-[11px] uppercase tracking-widest">{worker.experience} exp.</div>
+                  <div className="text-2xl font-black text-slate-900">{worker.hourlyRate.toLocaleString()} <span className="text-[11px] text-slate-300">FCFA/H</span></div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
         
-        <div className="mt-16 text-center">
+        <div className="mt-20 text-center">
           <button 
             onClick={() => setViewMode('list')} 
-            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-accent transition-all shadow-lg active:scale-95"
+            className="inline-flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em] hover:bg-accent transition-all shadow-xl active:scale-95"
           >
-            Voir tous les experts <ArrowRight size={16} />
+            Découvrir tous les experts <ArrowRight size={18} />
           </button>
         </div>
       </div>
@@ -415,41 +415,42 @@ const App: React.FC = () => {
   );
 
   const renderCTA = () => (
-    <section className="py-24 bg-white px-6">
+    <section className="py-32 bg-white px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="relative bg-slate-900 rounded-[3rem] p-10 lg:p-20 text-white overflow-hidden shadow-premium">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-accent opacity-10 blur-[100px]"></div>
+        <div className="relative bg-slate-900 rounded-[3.5rem] p-12 lg:p-24 text-white overflow-hidden shadow-premium">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-accent opacity-10 blur-[120px]"></div>
+          <div className="absolute bottom-0 left-0 w-1/2 h-full bg-brand opacity-5 blur-[120px]"></div>
           
-          <div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 space-y-10">
-              <div className="inline-block px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-[9px] font-black uppercase tracking-[0.3em]">Action</div>
-              <h2 className="text-4xl lg:text-6xl font-black leading-[0.95] tracking-tighter font-display">Prêt à régler<br /> <span className="text-accent underline underline-offset-8 decoration-accent/30 italic">votre problème ?</span></h2>
-              <p className="text-lg text-slate-400 font-medium max-w-md leading-relaxed">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center gap-20">
+            <div className="flex-1 space-y-12">
+              <div className="inline-block px-5 py-2 bg-white/10 border border-white/20 rounded-full text-[10px] font-black uppercase tracking-[0.3em]">Action</div>
+              <h2 className="text-5xl lg:text-8xl font-black leading-[0.9] tracking-tighter font-display">Prêt à régler<br /> <span className="text-accent underline underline-offset-8 decoration-accent/30 italic">votre problème ?</span></h2>
+              <p className="text-xl text-slate-400 font-medium max-w-lg leading-relaxed">
                 Plus de 10,000 clients au Cameroun nous font confiance quotidiennement.
               </p>
-              <div className="flex flex-wrap gap-5">
-                <button onClick={() => setViewMode('list')} className="bg-white text-slate-900 px-10 py-4.5 rounded-xl font-black text-[11px] uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-white/5 flex items-center gap-3">
-                  C'est parti <ArrowRight size={16} />
+              <div className="flex flex-wrap gap-6">
+                <button onClick={() => setViewMode('list')} className="bg-white text-slate-900 px-12 py-5 rounded-xl font-black text-[12px] uppercase tracking-widest hover:scale-105 transition-all shadow-2xl shadow-white/10 flex items-center gap-4">
+                  C'est parti <ArrowRight size={18} />
                 </button>
-                <button onClick={() => setViewMode('register')} className="bg-brand text-slate-900 px-10 py-4.5 rounded-xl font-black text-[11px] uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-brand/20">
+                <button onClick={() => setViewMode('register')} className="bg-brand text-slate-900 px-12 py-5 rounded-xl font-black text-[12px] uppercase tracking-widest hover:scale-105 transition-all shadow-2xl shadow-brand/20">
                   Rejoignez-nous
                 </button>
               </div>
             </div>
 
-            <div className="w-full lg:w-[450px]">
-              <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-10 space-y-8 group hover:border-white/20 transition-all duration-700 shadow-2xl">
-                <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center text-white shadow-xl shadow-accent/20 group-hover:scale-110 transition-transform duration-500">
-                  <Briefcase size={28} />
+            <div className="w-full lg:w-[500px]">
+              <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-12 space-y-10 group hover:border-white/20 transition-all duration-700 shadow-2xl">
+                <div className="w-20 h-20 bg-accent rounded-3xl flex items-center justify-center text-white shadow-2xl shadow-accent/30 group-hover:scale-110 transition-transform duration-500">
+                  <Briefcase size={36} />
                 </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-black tracking-tight font-display">Devenir Expert</h3>
-                  <p className="text-base text-slate-400 font-medium leading-relaxed">
+                <div className="space-y-4">
+                  <h3 className="text-3xl font-black tracking-tight font-display">Devenir Expert</h3>
+                  <p className="text-lg text-slate-400 font-medium leading-relaxed">
                     Professionnel qualifié ? Boostez votre visibilité et recevez des missions certifiées.
                   </p>
                 </div>
-                <button onClick={() => setViewMode('register')} className="w-full bg-white/10 hover:bg-white text-white hover:text-slate-900 py-5 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3">
-                  Créer mon compte pro <UserPlus size={16} />
+                <button onClick={() => setViewMode('register')} className="w-full bg-white/10 hover:bg-white text-white hover:text-slate-900 py-6 rounded-xl font-black text-[11px] uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3">
+                  Créer mon compte pro <UserPlus size={18} />
                 </button>
               </div>
             </div>
